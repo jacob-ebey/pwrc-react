@@ -1,0 +1,64 @@
+{
+  "publicPath": "/pwrc-react/static/",
+  "fileDynamicImports": {
+    "./src/app.jsx": {
+      "./components/cart": 774,
+      "./pages/about": 381,
+      "./pages/home": 58,
+      "./pages/not-found": 863,
+      "./pages/pdp": 165
+    },
+    "./src/pages/home.jsx": {
+      "../components/category-grid": 184
+    },
+    "./src/pages/pdp.jsx": {
+      "../components/category-grid": 184
+    }
+  },
+  "dynamicModuleChunks": {
+    "58": [
+      58
+    ],
+    "165": [
+      165
+    ],
+    "184": [
+      58,
+      165
+    ],
+    "381": [
+      381
+    ],
+    "774": [
+      774
+    ],
+    "863": [
+      863
+    ]
+  },
+  "chunks": {
+    "58": [
+      "58.0fafe91cfb28be49556f.js"
+    ],
+    "165": [
+      "165.fb42e23071ae5324b921.js"
+    ],
+    "184": [
+      "58.0fafe91cfb28be49556f.js",
+      "165.fb42e23071ae5324b921.js"
+    ],
+    "381": [
+      "381.ae5408ee9384441a6258.js"
+    ],
+    "774": [
+      "774.8b3fe7c6fc05768780a7.js"
+    ],
+    "863": [
+      "863.3d05ed264704e69da9fa.js"
+    ],
+    "main": [
+      "main.css",
+      "main.f987ce0e461e330c194f.js"
+    ]
+  }
+}
