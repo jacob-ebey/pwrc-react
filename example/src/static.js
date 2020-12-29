@@ -15,7 +15,7 @@ const promises = [
     paths,
     outdir: path.resolve(process.cwd(), "public"),
     basename: BASE_PATH,
-    followLinks: true,
+    followLinks: providedPaths.length === 0,
     renderedRoutes,
   }),
 ];
