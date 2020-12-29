@@ -33,9 +33,13 @@ function App() {
   return (
     <>
       <Helmet htmlAttributes={{ lang: "en-us" }}>
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="manifest" content="/manifest.json" />
+        <meta name="manifest" content={BASE_PATH + "/manifest.json"} />
+        <link
+          rel="icon"
+          type="image/x-icon"
+          href={BASE_PATH + "/favicon.ico"}
+        />
       </Helmet>
 
       <ErrorBoundary>
