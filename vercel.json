@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "/api/fakestoreapi.js",
+      "use": "@now/node"
+    },
+    {
+      "src": "/example/dist/vercel.js",
+      "use": "@now/node"
+    },
+    {
+      "src": "/example/public/**",
+      "use": "@now/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/fakestoreapi/(.*)",
+      "dest": "/api/fakestoreapi.js"
+    },
+    {
+      "src": "/",
+      "dest": "/example/dist/vercel.js"
+    },
+    {
+      "src": "/about",
+      "dest": "/example/dist/vercel.js"
+    },
+    {
+      "src": "/pdp/.*",
+      "dest": "/example/dist/vercel.js"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/example/public/static/$1"
+    },
+    {
+      "src": "/(.*).(png|ico|json|txt|html)",
+      "dest": "/example/public/$1.$2"
+    },
+    {
+      "src": ".*",
+      "dest": "/example/public/404.html"
+    }
+  ]
+}

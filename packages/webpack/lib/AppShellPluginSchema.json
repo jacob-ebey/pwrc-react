@@ -1,0 +1,23 @@
+{
+  "title": "AppShellPlugin",
+  "type": "object",
+  "description": "Options for the AppShellPlugin",
+  "additionalProperties": false,
+  "required": ["app"],
+  "properties": {
+    "app": {
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "document": {
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    }
+  }
+}

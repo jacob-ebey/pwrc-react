@@ -1,0 +1,21 @@
+{
+  "name": "@pwrc/prerender",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "16.6.0 - 16.9.x",
+    "react-router-dom": "5.0.0 - 5.2.x",
+    "react-helmet-async": "1.0.x"
+  },
+  "dependencies": {
+    "@pwrc/cache-control": "*",
+    "react-async-ssr": "^0.7.2",
+    "react-lazy-data": "^0.2.4"
+  },
+  "devDependencies": {
+    "react": "16.9.0",
+    "react-helmet-async": "^1.0.7",
+    "react-router-dom": "^5.2.0"
+  }
+}

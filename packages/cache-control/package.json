@@ -1,0 +1,12 @@
+{
+  "name": "@pwrc/cache-control",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "16.6.0 - 16.9.x"
+  },
+  "devDependencies": {
+    "react": "16.9.0"
+  }
+}
