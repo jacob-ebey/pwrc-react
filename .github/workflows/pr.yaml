@@ -39,6 +39,8 @@ jobs:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
+      - run: yarn
+
       - run: yarn workspace @pwrc/static-blog-example build
         env:
           BASE_PATH: "/examples/static-blog-example"
@@ -66,6 +68,8 @@ jobs:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
+      - run: yarn
+
       - run: yarn workspace @pwrc/ecom-example build
         env:
           BASE_PATH: "/examples/ecom-example"
@@ -92,6 +96,8 @@ jobs:
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - run: yarn
 
       - run: yarn workspace @pwrc/docs build
         env:
