@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@pwrc/prerender": "*"
+    "@pwrc/prerender": "*",
+    "nodemon-webpack-plugin": "^4.3.2"
   }
 }

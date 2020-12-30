@@ -6,42 +6,54 @@
       "use": "@now/node"
     },
     {
-      "src": "/example/dist/vercel.js",
+      "src": "/examples/static-blog-example/dist/vercel.js",
       "use": "@now/node"
     },
     {
-      "src": "/example/public/**",
+      "src": "/examples/static-blog-example/public/**",
+      "use": "@now/static"
+    },
+    {
+      "src": "/examples/ecom-example/dist/vercel.js",
+      "use": "@now/node"
+    },
+    {
+      "src": "/examples/ecom-example/public/**",
       "use": "@now/static"
     }
   ],
   "routes": [
     {
-      "src": "/api/fakestoreapi/(.*)",
-      "dest": "/api/fakestoreapi.js"
+      "src": "/examples/static-blog-example/static/(.*)",
+      "dest": "/examples/static-blog-example/public/static/$1"
     },
     {
-      "src": "/",
-      "dest": "/example/dist/vercel.js"
+      "src": "/examples/static-blog-example/(.*).(png|ico|json|txt)",
+      "dest": "/examples/static-blog-example/public/$1.$2"
     },
     {
-      "src": "/about",
-      "dest": "/example/dist/vercel.js"
+      "src": "/examples/static-blog-example/(.*)",
+      "dest": "/examples/static-blog-example/dist/vercel.js"
     },
     {
-      "src": "/pdp/.*",
-      "dest": "/example/dist/vercel.js"
+      "src": "/examples/static-blog-example",
+      "dest": "/examples/static-blog-example/dist/vercel.js"
     },
     {
-      "src": "/static/(.*)",
-      "dest": "/example/public/static/$1"
+      "src": "/examples/ecom-example/static/(.*)",
+      "dest": "/examples/ecom-example/public/static/$1"
     },
     {
-      "src": "/(.*).(png|ico|json|txt|html)",
-      "dest": "/example/public/$1.$2"
+      "src": "/examples/ecom-example/(.*).(png|ico|json|txt)",
+      "dest": "/examples/ecom-example/public/$1.$2"
     },
     {
-      "src": ".*",
-      "dest": "/example/public/404.html"
+      "src": "/examples/ecom-example/(.*)",
+      "dest": "/examples/ecom-example/dist/vercel.js"
+    },
+    {
+      "src": "/examples/ecom-example",
+      "dest": "/examples/ecom-example/dist/vercel.js"
     }
   ]
 }

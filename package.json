@@ -5,17 +5,9 @@
   "main": "index.js",
   "license": "MIT",
   "workspaces": [
-    "example",
+    "examples/*",
     "packages/*"
   ],
-  "scripts": {
-    "build": "yarn build:example",
-    "build:example": "yarn workspace @pwrc/example build",
-    "build:example:server": "yarn workspace @pwrc/example build:server",
-    "ssg": "yarn workspace @pwrc/example ssg",
-    "start:express": "yarn workspace @pwrc/example start:express",
-    "start:static": "yarn workspace @pwrc/example start:static"
-  },
   "dependencies": {
     "cross-fetch": "^3.0.6"
   }
