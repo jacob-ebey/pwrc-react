@@ -212,12 +212,11 @@ function Home() {
           </div>
           <div className="px-8 py-6 text-left lg:w-2/4 md:w-full">
             <h2 className="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">
-              Longer Information 2
+              Why Subscribe?
             </h2>
             <p className="mb-4 text-base leading-relaxed">
-              Professionally designed and 100% responsive static templates for
-              startups and personal use. .Fingerstache flexitarian street art
-              8-bit waistcoat. Distillery hexagon disrupt edison bulbche.
+              You're going to be following the creation of an awesome framework
+              by awesome people.
             </p>
           </div>
         </div>
