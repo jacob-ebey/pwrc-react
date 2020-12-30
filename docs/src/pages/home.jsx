@@ -19,8 +19,12 @@ function Home() {
         <TextHero
           title={
             <>
-              Create blazing fast websites and apps, both hybrid static &amp;
-              server rendered with @PWRC
+              Coming Soon
+              <br />
+              <small>
+                Create blazing fast websites and apps, both hybrid static &amp;
+                server rendered with @PWRC
+              </small>
             </>
           }
           details={
@@ -42,10 +46,10 @@ function Home() {
               error boundaries
             </p>
             <a
-              href="#"
+              href="https://github.com/jacob-ebey/pwrc-react/blob/main/examples/ecom-example/src/pages/home.jsx"
               className="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 "
             >
-              Learn More
+              See Example
               <svg
                 className="w-4 h-4 ml-2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -69,10 +73,10 @@ function Home() {
               pre-render any routes you wish such as a 404 page.
             </p>
             <a
-              href="#"
+              href="https://github.com/jacob-ebey/pwrc-react/blob/main/examples/static-blog-example/src/vercel.js"
               className="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 "
             >
-              Learn More
+              See Example
               <svg
                 className="w-4 h-4 ml-2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -97,15 +101,14 @@ function Home() {
             </h2>
             <p className="mb-4 text-base leading-relaxed">
               @PWRC also provides a handler for SSG where all you have to pass
-              is a list of routes. The blog for this site is an example of a
-              static site hosted on vercel along-side SSR'd state while
-              revalidate pages.
+              is a list of routes. The blog for this site will be pre-rendered
+              shortly along-side SSR'd stale while revalidate pages.
             </p>
             <a
-              href="#"
+              href="https://github.com/jacob-ebey/pwrc-react/blob/main/examples/static-blog-example/src/static.js"
               className="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 "
             >
-              Learn More
+              See Example
               <svg
                 className="w-4 h-4 ml-2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -135,10 +138,10 @@ function Home() {
               a cache-control header.
             </p>
             <a
-              href="#"
+              href="https://github.com/jacob-ebey/pwrc-react/blob/main/packages/vercel/index.js"
               className="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 "
             >
-              Learn More
+              See Usage
               <svg
                 className="w-4 h-4 ml-2"
                 xmlns="http://www.w3.org/2000/svg"
