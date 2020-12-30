@@ -21,12 +21,13 @@ function pwrcVercel(options) {
   async function pwrcVercelHandler(req, res) {
     try {
       let path = req.url;
-      if (path.length > 1 && path.endsWith("/")) {
-        path = path.slice(0, -1);
-      }
       if (basePath) {
         path = path.replace(`/^\\/${basePath}`, "");
       }
+      if (path.length > 1 && path.endsWith("/")) {
+        path = path.slice(0, -1);
+      }
+      console.log(path);
       const { html, maxAge } = await prerender(path, options);
       res.setHeader("Content-Type", "text/html; charset=UTF-8");
       res.setHeader(
