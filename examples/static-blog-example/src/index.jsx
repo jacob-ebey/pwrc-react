@@ -5,7 +5,7 @@ import lazy from "react-lazy-ssr";
 import { preloadData } from "react-lazy-data";
 import { HelmetProvider } from "react-helmet-async";
 
-import App from "./app";
+import App from "@pwrc/app";
 
 function Client() {
   return (

@@ -20,6 +20,14 @@
     {
       "src": "/examples/ecom-example/public/**",
       "use": "@now/static"
+    },
+    {
+      "src": "/demo/dist/vercel.js",
+      "use": "@now/node"
+    },
+    {
+      "src": "/demo/public/**",
+      "use": "@now/static"
     }
   ],
   "routes": [
@@ -56,8 +64,16 @@
       "dest": "/examples/ecom-example/dist/vercel.js"
     },
     {
-      "src": "/examples/ecom-example",
-      "dest": "/examples/ecom-example/dist/vercel.js"
+      "src": "/static/(.*)",
+      "dest": "/demo/public/static/$1"
+    },
+    {
+      "src": "/(.*).(png|ico|json|txt)",
+      "dest": "/demo/public/$1.$2"
+    },
+    {
+      "src": "(.*)",
+      "dest": "/demo/dist/vercel.js"
     }
   ]
 }

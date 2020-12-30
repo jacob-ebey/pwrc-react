@@ -27,7 +27,7 @@ function pwrcVercel(options) {
       if (path.length > 1 && path.endsWith("/")) {
         path = path.slice(0, -1);
       }
-      console.log(path);
+
       const { html, maxAge } = await prerender(path, options);
       res.setHeader("Content-Type", "text/html; charset=UTF-8");
       res.setHeader(

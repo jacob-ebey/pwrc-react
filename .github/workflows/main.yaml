@@ -39,6 +39,7 @@ jobs:
       - run: yarn workspace @pwrc/ecom-example build
         env:
           BASE_PATH: "/examples/ecom-example"
+      - run: yarn workspace @pwrc/docs build
       - uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}

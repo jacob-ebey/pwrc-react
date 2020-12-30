@@ -6,7 +6,8 @@
   "license": "MIT",
   "workspaces": [
     "examples/*",
-    "packages/*"
+    "packages/*",
+    "docs"
   ],
   "dependencies": {
     "cross-fetch": "^3.0.6"

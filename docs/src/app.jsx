@@ -8,28 +8,14 @@ import lazy from "react-lazy-ssr";
 import ErrorBoundary from "./components/error-boundary";
 import Shell from "./components/shell";
 
-import CartResource from "./resources/cart";
-
 import "./app.css";
 
-const Cart = lazy(() => import("./components/cart"), { ssr: false });
-
-// Routes
-const About = lazy(() => import("./pages/about"));
 const Home = lazy(() => import("./pages/home"));
+const Blog = lazy(() => import("./pages/blog"));
+const Post = lazy(() => import("./pages/blog-post"));
 const NotFound = lazy(() => import("./pages/not-found"));
-const PDP = lazy(() => import("./pages/pdp"));
 
 function App() {
-  const cartResource = CartResource.use(1);
-
-  const [cartOpen, setCartOpen] = useState(false);
-  const toggleCart = useCallback(() => setCartOpen(!cartOpen), [
-    cartOpen,
-    setCartOpen,
-  ]);
-  const closeCart = useCallback(() => setCartOpen(false), [setCartOpen]);
-
   return (
     <>
       <Helmet htmlAttributes={{ lang: "en-us" }}>
@@ -42,33 +28,23 @@ function App() {
         />
       </Helmet>
 
-      <Shell toggleCart={toggleCart}>
+      <Shell>
         <ErrorBoundary fallback="Something went wrong :(">
           <React.Suspense fallback="">
             <Switch>
               <Route exact path="/">
                 <Home />
               </Route>
-              <Route path="/about">
-                <About />
+              <Route path="/blog/:slug">
+                <Post />
               </Route>
-              <Route path="/pdp/:productId">
-                <PDP />
+              <Route exact path="/blog">
+                <Blog />
               </Route>
-
               <Route>
                 <NotFound />
               </Route>
             </Switch>
-            <ErrorBoundary>
-              <React.Suspense fallback="">
-                <Cart
-                  cartResource={cartResource}
-                  open={cartOpen}
-                  onClose={closeCart}
-                />
-              </React.Suspense>
-            </ErrorBoundary>
           </React.Suspense>
         </ErrorBoundary>
       </Shell>

@@ -16,11 +16,15 @@ function watchCompiler(config, shouldResolveOnFirstSuccessfulBuild) {
   });
 
   const compiler = webpack(config);
+  let firstBuild = true;
   compiler.watch({}, (err, stats) => {
     if (err) {
       console.error(err.stack || err);
       if (err.details) {
         console.error(err.details);
+      }
+      if (firstBuild && shouldResolveOnFirstSuccessfulBuild) {
+        reject(new Error("Failed on first build"));
       }
       return;
     }
@@ -28,13 +32,16 @@ function watchCompiler(config, shouldResolveOnFirstSuccessfulBuild) {
     if (stats.hasErrors()) {
       console.log("Finished running webpack with errors.");
       info.errors.forEach((e) => console.error(e));
-      reject(new Error());
+      if (firstBuild && shouldResolveOnFirstSuccessfulBuild) {
+        reject(new Error("Failed on first build"));
+      }
     } else {
-      if (resolve && shouldResolveOnFirstSuccessfulBuild) {
+      if (firstBuild && shouldResolveOnFirstSuccessfulBuild) {
         resolve();
-        resolve = false;
+        firstBuild = false;
       }
     }
+    firstBuild = false;
   });
 
   return promise;
