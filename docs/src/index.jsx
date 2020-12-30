@@ -10,7 +10,7 @@ import App from "@pwrc/app";
 function Client() {
   return (
     <HelmetProvider>
-      <BrowserRouter basename={BASE_PATH}>
+      <BrowserRouter>
         <App />
       </BrowserRouter>
     </HelmetProvider>

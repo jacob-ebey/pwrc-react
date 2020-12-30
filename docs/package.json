@@ -1,0 +1,36 @@
+{
+  "name": "@pwrc/docs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf ./dist && rimraf ./public/static",
+    "build": "pwrc build",
+    "dev": "pwrc dev",
+    "start": "node ./dist/express.js"
+  },
+  "dependencies": {
+    "@pwrc/cache-control": "*",
+    "@pwrc/express": "*",
+    "@pwrc/static": "*",
+    "classnames": "^2.2.6",
+    "date-fns": "^2.16.1",
+    "express": "^4.17.1",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-helmet-async": "^1.0.7",
+    "react-lazy-data": "^0.2.4",
+    "react-lazy-ssr": "^0.2.4",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@pwrc/cli": "*",
+    "@pwrc/webpack": "*",
+    "autoprefixer": "^10.1.0",
+    "cross-env": "^7.0.3",
+    "frontmatter-markdown-loader": "^3.6.2",
+    "rimraf": "^3.0.2",
+    "serve": "^11.3.2",
+    "tailwindcss": "^2.0.2"
+  }
+}
