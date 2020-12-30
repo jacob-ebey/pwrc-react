@@ -17,16 +17,8 @@ const useCacheControl = require("@pwrc/cache-control");
 
 const fs = require("fs");
 const path = require("path");
-// TODO: Make stats configurable to support environments and federation
-const compilerProvidedStats = COMPILER_PROVIDED_STATS;
-const stats =
-  compilerProvidedStats ||
-  JSON.parse(
-    fs.readFileSync(
-      path.resolve(process.cwd(), "../public/static/lazy-stats.json"),
-      { encoding: "utf-8" }
-    )
-  );
+
+const stats = COMPILER_PROVIDED_STATS;
 
 /**
  * @param {string} location

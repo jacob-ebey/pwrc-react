@@ -44,87 +44,89 @@ class LazyStatsPlugin {
       }
     );
 
-    compiler.hooks.emit.tapPromise(PLUGIN_NAME, async (compilation) => {
-      const stats = compilation.getStats().toJson();
-      const chunkMap = new Map(stats.chunks.map((c) => [c.id, c]));
+    compiler.hooks.compilation.tap(PLUGIN_NAME, (compilation) => {
+      compilation.hooks.afterSeal.tapPromise(PLUGIN_NAME, async () => {
+        const stats = compilation.getStats().toJson();
+        const chunkMap = new Map(stats.chunks.map((c) => [c.id, c]));
 
-      const dynamicModules = stats.modules.filter(
-        (m) => m.reasons && m.reasons.some((r) => r.type === "import()")
-      );
+        const dynamicModules = stats.modules.filter(
+          (m) => m.reasons && m.reasons.some((r) => r.type === "import()")
+        );
 
-      const dynamicModuleChunks = new Map(
-        dynamicModules.map((mod) => [
-          mod.id,
-          flatten(mod.chunks.map((c) => chunkMap.get(c))),
-        ])
-      );
+        const dynamicModuleChunks = new Map(
+          dynamicModules.map((mod) => [
+            mod.id,
+            flatten(mod.chunks.map((c) => chunkMap.get(c))),
+          ])
+        );
 
-      const fileDynamicImports = {};
-      for (const mod of dynamicModules) {
-        for (const reason of mod.reasons) {
-          if (
-            !reason.moduleId ||
-            !reason.resolvedModule ||
-            !reason.userRequest
-          ) {
-            continue;
-          }
-
-          if (!fileDynamicImports[reason.resolvedModule]) {
-            fileDynamicImports[reason.resolvedModule] = {};
-          }
-
-          fileDynamicImports[reason.resolvedModule][reason.userRequest] =
-            mod.id;
-        }
-      }
-
-      const reasonsToChunks = dynamicModules.reduce((result, mod) => {
-        return Object.assign(
-          result,
-          mod.reasons.reduce((reasons, reason) => {
-            if (!reason.moduleId || !reason.resolvedModule) {
-              return reasons;
+        const fileDynamicImports = {};
+        for (const mod of dynamicModules) {
+          for (const reason of mod.reasons) {
+            if (
+              !reason.moduleId ||
+              !reason.resolvedModule ||
+              !reason.userRequest
+            ) {
+              continue;
             }
 
-            return Object.assign(reasons, {});
-          }, {})
-        );
-      }, {});
+            if (!fileDynamicImports[reason.resolvedModule]) {
+              fileDynamicImports[reason.resolvedModule] = {};
+            }
 
-      const statsShort = {
-        publicPath: stats.publicPath,
-        fileDynamicImports,
-        dynamicModuleChunks: Object.fromEntries(
-          Array.from(dynamicModuleChunks).map(([k, cs]) => [
-            k,
-            cs.map((c) => c.id),
-          ])
-        ),
-        chunks: Object.assign(
-          {},
-          mapValues(stats.namedChunkGroups, (chunkStats) =>
-            chunkStats.assets.map((a) => a.name)
-          ),
-          Object.fromEntries(
-            Array.from(dynamicModuleChunks).map(([id, chunks]) => [
-              id,
-              flatten(chunks.map((c) => getChunkFiles(c, chunkMap))),
+            fileDynamicImports[reason.resolvedModule][reason.userRequest] =
+              mod.id;
+          }
+        }
+
+        const reasonsToChunks = dynamicModules.reduce((result, mod) => {
+          return Object.assign(
+            result,
+            mod.reasons.reduce((reasons, reason) => {
+              if (!reason.moduleId || !reason.resolvedModule) {
+                return reasons;
+              }
+
+              return Object.assign(reasons, {});
+            }, {})
+          );
+        }, {});
+
+        const statsShort = {
+          publicPath: stats.publicPath,
+          fileDynamicImports,
+          dynamicModuleChunks: Object.fromEntries(
+            Array.from(dynamicModuleChunks).map(([k, cs]) => [
+              k,
+              cs.map((c) => c.id),
             ])
-          )
-        ),
-      };
+          ),
+          chunks: Object.assign(
+            {},
+            mapValues(stats.namedChunkGroups, (chunkStats) =>
+              chunkStats.assets.map((a) => a.name)
+            ),
+            Object.fromEntries(
+              Array.from(dynamicModuleChunks).map(([id, chunks]) => [
+                id,
+                flatten(chunks.map((c) => getChunkFiles(c, chunkMap))),
+              ])
+            )
+          ),
+        };
 
-      const result = JSON.stringify(statsShort, null, 2);
+        const result = JSON.stringify(statsShort, null, 2);
 
-      compilation.assets[this._filename] = {
-        source() {
-          return result;
-        },
-        size() {
-          return result.length;
-        },
-      };
+        compilation.assets[this._filename] = {
+          source() {
+            return result;
+          },
+          size() {
+            return result.length;
+          },
+        };
+      });
     });
   }
 }

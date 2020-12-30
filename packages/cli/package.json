@@ -1,0 +1,19 @@
+{
+  "name": "@pwrc/cli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "pwrc": "./bin/pwrc.js"
+  },
+  "engines": {
+    "node": ">=10.14",
+    "npm": ">=6",
+    "yarn": ">=1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@pwrc/webpack": "*",
+    "yargs": "^16.2.0",
+    "webpack": "^5.11.1"
+  }
+}

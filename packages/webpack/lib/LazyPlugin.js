@@ -79,31 +79,19 @@ class LazyPlugin {
       return statsPromise;
     };
 
-    compiler.hooks.beforeRun.tapPromise(PLUGIN_NAME, async (comp) => {
-      const providedStats = (await pwrc.safeReadStats()).stats;
+    let providedStatsRef = {};
+    new DefinePlugin({
+      COMPILER_PROVIDED_STATS: DefinePlugin.runtimeValue(
+        () => JSON.stringify(providedStatsRef.value),
+        [this._filename]
+      ),
+    }).apply(compiler);
 
-      new DefinePlugin({
-        COMPILER_PROVIDED_STATS: JSON.stringify(providedStats),
-      }).apply(comp);
+    compiler.hooks.beforeCompile.tapPromise(PLUGIN_NAME, async () => {
+      providedStatsRef.value = (await pwrc.safeReadStats()).stats;
     });
 
     compiler.hooks.afterCompile.tap(PLUGIN_NAME, (compilation) => {
-      statsPromise = null;
-    });
-
-    compiler.hooks.thisCompilation.tap(PLUGIN_NAME, (compilation) => {
-      compilation.fileDependencies.add(path.resolve(this._filename));
-
-      compilation.hooks.childCompiler.tap(PLUGIN_NAME, (childCompiler) => {
-        childCompiler.$pwrc = pwrc;
-      });
-    });
-
-    compiler.hooks.run.tap(PLUGIN_NAME, () => {
-      statsPromise = null;
-    });
-
-    compiler.hooks.watchRun.tap(PLUGIN_NAME, () => {
       statsPromise = null;
     });
   }

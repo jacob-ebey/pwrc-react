@@ -1,0 +1,35 @@
+{
+  "name": "@pwrc/ecom-example",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "pwrc build",
+    "dev": "pwrc dev",
+    "clean": "rimraf ./dist && rimraf ./public/static rimraf ./public/**/*.html",
+    "start": "node ./dist/express.js"
+  },
+  "devDependencies": {
+    "@pwrc/cli": "*",
+    "@pwrc/webpack": "*",
+    "autoprefixer": "^10.1.0",
+    "cross-env": "^7.0.3",
+    "rimraf": "^3.0.2",
+    "tailwindcss": "^2.0.2",
+    "webpack-node-externals": "^2.5.2"
+  },
+  "dependencies": {
+    "@pwrc/cache-control": "*",
+    "@pwrc/express": "*",
+    "@pwrc/static": "*",
+    "classnames": "^2.2.6",
+    "cross-fetch": "^3.0.6",
+    "express": "^4.17.1",
+    "glob": "^7.1.6",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-helmet-async": "^1.0.7",
+    "react-lazy-data": "^0.2.4",
+    "react-lazy-ssr": "^0.2.4",
+    "react-router-dom": "^5.2.0"
+  }
+}
