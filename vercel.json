@@ -22,11 +22,11 @@
       "use": "@now/static"
     },
     {
-      "src": "/demo/dist/vercel.js",
+      "src": "/docs/dist/vercel.js",
       "use": "@now/node"
     },
     {
-      "src": "/demo/public/**",
+      "src": "/docs/public/**",
       "use": "@now/static"
     }
   ],
@@ -65,15 +65,15 @@
     },
     {
       "src": "/static/(.*)",
-      "dest": "/demo/public/static/$1"
+      "dest": "/docs/public/static/$1"
     },
     {
       "src": "/(.*).(png|ico|json|txt)",
-      "dest": "/demo/public/$1.$2"
+      "dest": "/docs/public/$1.$2"
     },
     {
       "src": "(.*)",
-      "dest": "/demo/dist/vercel.js"
+      "dest": "/docs/dist/vercel.js"
     }
   ]
 }
