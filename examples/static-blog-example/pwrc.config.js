@@ -12,7 +12,7 @@ module.exports = {
       config.entry = {
         express: "./src/express.js",
         static: "./src/static.js",
-        static: "./src/vercel.js",
+        vercel: "./src/vercel.js",
       };
 
       config = nodeExternals.apply(config, {
