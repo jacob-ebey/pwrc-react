@@ -63,8 +63,16 @@ async function dev(argv) {
   let serverConfig = merge(baseServerConfig, devConfig);
 
   if (config.webpack) {
-    clientConfig = config.webpack(clientConfig, { server: false, dev: true });
-    serverConfig = config.webpack(serverConfig, { server: true, dev: true });
+    clientConfig = config.webpack(clientConfig, {
+      server: false,
+      dev: true,
+      webpack,
+    });
+    serverConfig = config.webpack(serverConfig, {
+      server: true,
+      dev: true,
+      webpack,
+    });
   }
 
   if (!clientConfig) {

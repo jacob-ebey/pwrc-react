@@ -1,14 +1,30 @@
 import * as React from "react";
+import { useCallback } from "react";
 import { withResources } from "react-lazy-data";
 import { Helmet } from "react-helmet-async";
 
 import "../styles/markdown.css";
 
+import Spinner from "../components/spinner";
 import TextHero from "../components/text-hero";
+import useMailingList from "../hooks/use-mailing-list";
 
 import global from "../../blog/global";
 
 function Home() {
+  const [subscribe, { loading, error, subscribed }] = useMailingList();
+
+  const handleSubscribe = useCallback((event) => {
+    event.preventDefault();
+    const email = event.target.elements.email.value;
+
+    if (!email) {
+      return;
+    }
+
+    subscribe(email);
+  });
+
   return (
     <>
       <Helmet htmlAttributes={{ lang: "en-us" }}>
@@ -156,6 +172,55 @@ function Home() {
             </a>
           </div>
         </section>
+
+        <div className="flex flex-wrap mb-32">
+          <div className="px-8 py-6 text-left lg:w-2/4 md:w-full lg:border-r">
+            <h2 className="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">
+              Subscribe for Email Alerts
+            </h2>
+            <p className="mb-4 text-base leading-relaxed">
+              {!subscribed
+                ? "You're not going to want to miss these updates."
+                : "Thanks for subscribing for updates!"}
+            </p>
+            {loading ? (
+              <Spinner className="ml-2" size={8} />
+            ) : (
+              !subscribed && (
+                <form
+                  onSubmit={handleSubscribe}
+                  className="flex justify-center mt-6"
+                >
+                  <input
+                    className="flex-grow w-full px-4 py-2 mb-4 mr-4 text-base text-purple-700 bg-gray-100 border border-gray-400 rounded-lg focus:outline-none focus:border-purple-500 sm:mb-0 focus:bg-white"
+                    placeholder="Your Email"
+                    type="email"
+                    name="email"
+                    required
+                  />
+                  <button className="flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:ringfocus:outline-none">
+                    Subscribe
+                  </button>
+                </form>
+              )
+            )}
+            {error && (
+              <span className="block mt-2 text-red-600">
+                something went wrong 😔 try again?
+              </span>
+            )}
+          </div>
+          <div className="px-8 py-6 text-left lg:w-2/4 md:w-full">
+            <h2 className="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">
+              Longer Information 2
+            </h2>
+            <p className="mb-4 text-base leading-relaxed">
+              Professionally designed and 100% responsive static templates for
+              startups and personal use. .Fingerstache flexitarian street art
+              8-bit waistcoat. Distillery hexagon disrupt edison bulbche.
+            </p>
+          </div>
+        </div>
 
         <TextHero
           className="mb-32"

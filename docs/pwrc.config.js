@@ -5,9 +5,15 @@ module.exports = {
   /**
    *
    * @param {import("webpack").Configuration} config
-   * @param {*} param1
+   * @param {{ webpack: import("webpack") }} param1
    */
-  webpack(config, { server, dev }) {
+  webpack(config, { server, dev, webpack: { DefinePlugin } }) {
+    config.plugins.push(
+      new DefinePlugin({
+        FAUNA_PUBLIC_KEY: JSON.stringify(process.env.FAUNA_PUBLIC_KEY),
+      })
+    );
+
     if (server) {
       config.entry = {
         express: "./src/express.js",

@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf ./dist && rimraf ./public/static",
     "build": "pwrc build",
-    "dev": "pwrc dev",
+    "dev": "dotenv -- pwrc dev",
     "start": "node ./dist/express.js"
   },
   "dependencies": {
@@ -15,6 +15,7 @@
     "@pwrc/static": "*",
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
+    "dotenv-cli": "^4.0.0",
     "express": "^4.17.1",
     "react": "16.9.0",
     "react-dom": "16.9.0",

@@ -1,6 +1,6 @@
 export default {
   hero: {
     title: "@PWRC Blog",
-    details: "Some thoughts from the authors of @PWRC",
+    details: "Thoughts from the authors of @PWRC coming soon",
   },
 };

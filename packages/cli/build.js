@@ -46,8 +46,16 @@ async function build(argv) {
   let serverConfig = baseServerConfig;
 
   if (config.webpack) {
-    clientConfig = config.webpack(clientConfig, { server: false });
-    serverConfig = config.webpack(serverConfig, { server: true });
+    clientConfig = config.webpack(clientConfig, {
+      server: false,
+      dev: false,
+      webpack,
+    });
+    serverConfig = config.webpack(serverConfig, {
+      server: true,
+      dev: false,
+      webpack,
+    });
   }
 
   if (!clientConfig) {
