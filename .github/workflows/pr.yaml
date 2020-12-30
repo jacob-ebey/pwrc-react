@@ -27,9 +27,34 @@ jobs:
         node-version: [12.x]
 
     steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
       - run: yarn workspace @pwrc/static-blog-example build
         env:
           BASE_PATH: "/pwrc-react"
+
+  deployStaticBlog:
+    needs: [build-static-blog-example]
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./examples/static-blog-example/public
 
   build-ecom-example:
     needs: [install]
@@ -40,6 +65,11 @@ jobs:
         node-version: [12.x]
 
     steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
       - run: yarn workspace @pwrc/ecom-example build
         env:
           BASE_PATH: "/pwrc-react"
@@ -54,12 +84,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
       - uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-args: "--prod"
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
           vercel-project-id: ${{ secrets.VERCELPROJECT_ID}}
           working-directory: ./
+
           alias-domains: |
             pr-{{PR_NUMBER}}.pwrc-react.vercel.app
