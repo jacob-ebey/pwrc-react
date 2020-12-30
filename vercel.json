@@ -72,7 +72,7 @@
       "dest": "/docs/public/$1.$2"
     },
     {
-      "src": "(.*)",
+      "src": "/(.*)",
       "dest": "/docs/dist/vercel.js"
     }
   ]
