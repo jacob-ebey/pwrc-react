@@ -3,7 +3,7 @@ name: PR CI
 on: [pull_request]
 
 jobs:
-  install:
+  Deploy:
     runs-on: ubuntu-latest
 
     strategy:
@@ -32,5 +32,3 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
           working-directory: ./
-          alias-domains: |
-            pr-{{ github.event.number }}.pwrc-react.vercel.app
