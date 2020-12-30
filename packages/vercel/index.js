@@ -1,5 +1,7 @@
 const prerender = require("@pwrc/prerender");
 
+const basePath = BASE_PATH;
+
 /**
  * @typedef {object} PWRCVercelOptions
  * @property {string[]} scripts
@@ -22,9 +24,15 @@ function pwrcVercel(options) {
       if (path.length > 1 && path.endsWith("/")) {
         path = path.slice(0, -1);
       }
+      if (basePath) {
+        path = path.replace(`/^\\/${basePath}`, "");
+      }
       const { html, maxAge } = await prerender(path, options);
       res.setHeader("Content-Type", "text/html; charset=UTF-8");
-      res.setHeader("Cache-Control", `public, max-age=${maxAge}, stale-while-revalidate`);
+      res.setHeader(
+        "Cache-Control",
+        `public, max-age=${maxAge}, stale-while-revalidate`
+      );
 
       res.write(html);
       res.end();
