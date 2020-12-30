@@ -205,7 +205,7 @@ function Home() {
               )
             )}
             {error && (
-              <span className="block mt-2 text-red-600">
+              <span className="block mt-4 text-red-600">
                 something went wrong 😔 try again?
               </span>
             )}
