@@ -64,6 +64,10 @@
       "dest": "/examples/ecom-example/dist/vercel.js"
     },
     {
+      "src": "/examples/ecom-example",
+      "dest": "/examples/ecom-example/dist/vercel.js"
+    },
+    {
       "src": "/static/(.*)",
       "dest": "/docs/public/static/$1"
     },
