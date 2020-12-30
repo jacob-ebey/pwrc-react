@@ -32,19 +32,19 @@
       "dest": "/examples/static-blog-example/public/$1.$2"
     },
     {
-      "src": "/examples/static-blog-example.*",
+      "src": "/examples/static-blog-example/.*",
       "dest": "/examples/static-blog-example/dist/vercel.js"
     },
     {
       "src": "/examples/ecom-example/static/(.*)",
-      "dest": "/examples/ecom-example/static/$1"
+      "dest": "/examples/ecom-example/public/static/$1"
     },
     {
       "src": "/examples/ecom-example(.*).(png|ico|json|txt)",
       "dest": "/examples/ecom-example/public/$1.$2"
     },
     {
-      "src": "/examples/ecom-example.*",
+      "src": "/examples/ecom-example/.*",
       "dest": "/examples/ecom-example/dist/vercel.js"
     }
   ]

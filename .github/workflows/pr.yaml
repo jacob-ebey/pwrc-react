@@ -19,7 +19,6 @@ jobs:
       - run: yarn
 
       # Build and deploy static-blog-example and ecom-example to Vercel
-      - run: yarn workspace @pwrc/static-blog-example clean
       - run: yarn workspace @pwrc/static-blog-example build
         env:
           BASE_PATH: "/examples/static-blog-example"
