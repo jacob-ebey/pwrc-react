@@ -2,63 +2,53 @@
   "publicPath": "/pwrc-react/static/",
   "fileDynamicImports": {
     "./src/app.jsx": {
-      "./components/cart": 774,
-      "./pages/about": 381,
-      "./pages/home": 58,
-      "./pages/not-found": 863,
-      "./pages/pdp": 165
+      "./pages/about": 846,
+      "./pages/home": 17,
+      "./pages/not-found": 978,
+      "./pages/post": 312
     },
-    "./src/pages/home.jsx": {
-      "../components/category-grid": 184
-    },
-    "./src/pages/pdp.jsx": {
-      "../components/category-grid": 184
+    "./src/resources/blog-posts.js": {
+      "date-fns/format": 68
     }
   },
   "dynamicModuleChunks": {
-    "58": [
-      58
+    "17": [
+      17
     ],
-    "165": [
-      165
+    "68": [
+      68
     ],
-    "184": [
-      58,
-      165
+    "312": [
+      358
     ],
-    "381": [
-      381
+    "846": [
+      623
     ],
-    "774": [
-      774
-    ],
-    "863": [
-      863
+    "978": [
+      978
     ]
   },
   "chunks": {
-    "58": [
-      "58.0fafe91cfb28be49556f.js"
+    "17": [
+      "17.31bae08b702c7b67a81e.js"
     ],
-    "165": [
-      "165.fb42e23071ae5324b921.js"
+    "68": [
+      "68.8f62b80a1f61565f49ce.js"
     ],
-    "184": [
-      "58.0fafe91cfb28be49556f.js",
-      "165.fb42e23071ae5324b921.js"
+    "312": [
+      "358.e73c8f227a76c9ad4b04.css",
+      "358.9d0f808750cd2f513959.js"
     ],
-    "381": [
-      "381.ae5408ee9384441a6258.js"
+    "846": [
+      "623.e73c8f227a76c9ad4b04.css",
+      "623.34b651ac14a1e8a55b98.js"
     ],
-    "774": [
-      "774.8b3fe7c6fc05768780a7.js"
-    ],
-    "863": [
-      "863.3d05ed264704e69da9fa.js"
+    "978": [
+      "978.5ca010b562ee32098a64.js"
     ],
     "main": [
-      "main.e283f694e0f0117413d5.css",
-      "main.4ec8334ba972e2b4680c.js"
+      "main.b403e1bd77770ca26ec9.css",
+      "main.23d9eea7d617c87d3fd2.js"
     ]
   }
 }
