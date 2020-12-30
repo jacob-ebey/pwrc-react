@@ -24,6 +24,10 @@
   ],
   "routes": [
     {
+      "src": "/api/fakestoreapi/(.*)",
+      "dest": "/api/fakestoreapi.js"
+    },
+    {
       "src": "/examples/static-blog-example/static/(.*)",
       "dest": "/examples/static-blog-example/public/static/$1"
     },
