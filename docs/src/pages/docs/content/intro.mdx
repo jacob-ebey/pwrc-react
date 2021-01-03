@@ -1,0 +1,43 @@
+# @PWRC Docs
+
+Welcome to the @PWRC documentation!
+
+If you are new to React, this is not the place to start. Go explore the many awesome tutorials
+and resources around [create-react-app](https://reactjs.org/docs/create-a-new-react-app.html)
+to get started.
+
+If `code-splitting` or `suspense on the server` get you excited, this is for you.
+
+## What is this?
+
+@PWRC is a [CLI](/docs/cli) on top of a collection of webpack plugins that exposes a series of
+imports that you can utlize to integrate SSR into your hosting provider of choise.
+
+We have built in integrations for Vercel and Express. Head over and read more
+[here](/docs/integrations).
+
+### PWRCPlugin
+
+The PWRCPlugin is responsible for providing other plugins based on if it's a client
+or server build, along with adding the `lazy-loader` on javascript modules to enable
+code-splitting of components.
+
+#### AppShellPlugin
+
+The AppShellPlugin is configured through the PWRCPlugin and is responsible for aliasing
+your App file as `@pwrc/app` for use, as well as aliasing or providing a default
+`@pwrc/document` that is used on SSR.
+
+#### LazyStatsPlugin
+
+The LazyStatsPlugin is provided by the PWRCPlugin on client builds and is responsible
+for generating a `lazy-stats.json` file that contains all the relevant information
+required for preloading code-split modules.
+
+#### LazyPlugin
+
+The LazyPlugin is provided by the PWRCPlugin on server builds and is responsible for
+providing the information generated on client builds by the LazyStatsPlugin to the
+server runtime. This is done via the DefinePlugin and watches for changes in dev mode.
+This plugin also provides the information to the `lazy-loader` for manipulationn of
+the lazy function calls.

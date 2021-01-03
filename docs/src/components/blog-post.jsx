@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet-async";
 
-import global from "../../blog/global";
+import global from "../../content/global";
 
 import TextHero from "./text-hero";
 

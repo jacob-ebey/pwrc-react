@@ -1,6 +1,7 @@
 const expressDev = require("@pwrc/express/dev");
 const nodeExternals = require("@pwrc/webpack/node-externals");
 
+
 module.exports = {
   /**
    *
@@ -32,6 +33,20 @@ module.exports = {
     config.module.rules.push({
       include: /\.md$/,
       use: "frontmatter-markdown-loader",
+    });
+
+    config.module.rules.push({
+      include: /\.mdx$/,
+      use: [
+        {
+          loader: "esbuild-loader",
+          options: {
+            loader: "jsx",
+            target: "es2015",
+          },
+        },
+        "@mdx-js/loader",
+      ],
     });
 
     return config;

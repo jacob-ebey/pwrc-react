@@ -5,7 +5,7 @@ import cn from "classnames";
 
 import GithubIcon from "./icons/github";
 
-import global from "../../blog/global";
+import global from "../../content/global";
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -24,11 +24,11 @@ function Header() {
         </Link>
         <nav className="flex items-center justify-center ml-4 text-base">
           <Link
-            to="/"
+            to="/docs"
             onClick={close}
             className="mr-5 text-sm font-semibold text-gray-700 rounded-xl hover:text-gray-800"
           >
-            Home
+            Docs
           </Link>
           <Link
             to="/blog"

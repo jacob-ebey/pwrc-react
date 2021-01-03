@@ -9,7 +9,7 @@ import Spinner from "../components/spinner";
 import TextHero from "../components/text-hero";
 import useMailingList from "../hooks/use-mailing-list";
 
-import global from "../../blog/global";
+import global from "../../content/global";
 
 function Home() {
   const [subscribe, { loading, error, subscribed }] = useMailingList();

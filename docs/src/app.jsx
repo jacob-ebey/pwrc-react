@@ -10,9 +10,10 @@ import Shell from "./components/shell";
 
 import "./app.css";
 
-const Home = lazy(() => import("./pages/home"));
 const Blog = lazy(() => import("./pages/blog"));
 const Post = lazy(() => import("./pages/blog-post"));
+const Docs = lazy(() => import("./pages/docs"));
+const Home = lazy(() => import("./pages/home"));
 const NotFound = lazy(() => import("./pages/not-found"));
 
 function App() {
@@ -35,10 +36,13 @@ function App() {
               <Route exact path="/">
                 <Home />
               </Route>
+              <Route path="/docs">
+                <Docs />
+              </Route>
               <Route path="/blog/:slug">
                 <Post />
               </Route>
-              <Route exact path="/blog">
+              <Route path="/blog">
                 <Blog />
               </Route>
               <Route>

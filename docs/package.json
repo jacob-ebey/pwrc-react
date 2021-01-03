@@ -10,6 +10,7 @@
     "start": "node ./dist/express.js"
   },
   "dependencies": {
+    "@mdx-js/react": "^1.6.22",
     "@pwrc/cache-control": "*",
     "@pwrc/express": "*",
     "@pwrc/static": "*",
@@ -25,6 +26,7 @@
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
+    "@mdx-js/loader": "^1.6.22",
     "@pwrc/cli": "*",
     "@pwrc/webpack": "*",
     "autoprefixer": "^10.1.0",

@@ -8,7 +8,7 @@ import TextHero from "../components/text-hero";
 
 import BlogPostsResource from "../resources/blog-posts";
 
-import global from "../../blog/global";
+import global from "../../content/global";
 import home from "../../blog/home";
 
 const BlogPostsRenderer = withResources(BlogPostList);

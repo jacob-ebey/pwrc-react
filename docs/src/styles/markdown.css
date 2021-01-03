@@ -18,7 +18,9 @@
 }
 
 /* Headers */
-.markdown h1,
+.markdown h1 {
+  @apply text-2xl my-6 font-semibold;
+}
 .markdown h2 {
   @apply text-xl my-6 font-semibold;
 }
@@ -30,7 +32,9 @@
 }
 
 @screen sm {
-  .markdown h1,
+  .markdown h1 {
+    @apply text-4xl;
+  }
   .markdown h2 {
     @apply text-2xl;
   }

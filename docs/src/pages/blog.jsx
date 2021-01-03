@@ -8,8 +8,8 @@ import TextHero from "../components/text-hero";
 
 import BlogPostsResource from "../resources/blog-posts";
 
-import global from "../../blog/global";
-import home from "../../blog/info";
+import global from "../../content/global";
+import blogInfo from "../../content/blog/info";
 
 const BlogPostsRenderer = withResources(BlogPostList);
 
@@ -20,10 +20,10 @@ function Blog() {
     <>
       <Helmet htmlAttributes={{ lang: "en-us" }}>
         <title>{global.siteName} | Blog</title>
-        <meta name="description" content={home.hero.details} />
+        <meta name="description" content={blogInfo.hero.details} />
       </Helmet>
       <div className="container px-6 w-full max-w-full lg:max-w-4xl xl:max-w-screen-1xl mx-auto">
-        <TextHero title={home.hero.title} details={home.hero.details} />
+        <TextHero title={blogInfo.hero.title} details={blogInfo.hero.details} />
 
         <main className="my-36">
           <BlogPostsRenderer blogPosts={blogPostsResource} />

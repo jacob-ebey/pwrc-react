@@ -1,6 +1,6 @@
 import { createResourceFactory } from "react-lazy-data";
 
-const context = require.context("../../blog", false, /\.md$/);
+const context = require.context("../../content/blog", false, /\.md$/);
 
 const BlogPostResource = createResourceFactory(
   async (id) => {

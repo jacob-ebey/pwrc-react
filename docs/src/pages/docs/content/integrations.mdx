@@ -1,0 +1,120 @@
+# Integrations
+
+@PWRC strives to be useable wherever you need it, but out of the box, we make integrating with
+[Express](https://expressjs.com/) and
+[Vercel serverless functions](https://vercel.com/docs/serverless-functions/introduction)
+a piece of cake.
+
+## Vercel
+
+The vercel integration is avaliable through `@pwrc/vercel`.
+
+server.js
+
+```js
+import pwrcVercel from "@pwrc/vercel";
+
+export default pwrcVercel();
+```
+
+pwrc.config.js
+
+```js
+const nodeExternals = require("@pwrc/webpack/node-externals");
+
+module.exports = {
+  webpack(config, { server, dev }) {
+    if (server) {
+      // Exclude node modules from build
+      config = nodeExternals.apply(config);
+    }
+
+    return config;
+  },
+};
+```
+
+## Express
+
+The express integration is avaliable through `@pwrc/express`.
+
+server.js
+
+```js
+import path from "path";
+import express from "express";
+
+// Import the ssr handler for express
+import pwrcExpress from "@pwrc/express";
+
+const app = express();
+
+// Expose all the public files such as bundled js and css
+app.use("/", express.static(path.resolve(process.cwd(), "public")));
+
+// Send everything else to the ssr handler
+app.use("/*", pwrcExpress());
+
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`🚀 App started on port http://localhost:${port}`);
+});
+```
+
+pwrc.config.js
+
+```js
+const expressDev = require("@pwrc/express/dev");
+const nodeExternals = require("@pwrc/webpack/node-externals");
+
+module.exports = {
+  webpack(config, { server, dev }) {
+    if (server) {
+      // Exclude node modules from build
+      config = nodeExternals.apply(config);
+
+      // Enabled restarting of the server for express in dev mode
+      if (dev) {
+        expressDev.apply(config, { script: "./dist/express.js" });
+      }
+    }
+
+    return config;
+  },
+};
+```
+
+## Enabling multiple integrations
+
+You can enable multiple server entry points, therefore multiple integrations
+can be built in the same webpack build. This is useful if since right now we
+only support local dev servers for express. Accomplishing this can be done via
+the `pwrc.config.js` file in the root of your project like so:
+
+pwrc.config.js
+
+```js
+const expressDev = require("@pwrc/express/dev");
+const nodeExternals = require("@pwrc/webpack/node-externals");
+
+module.exports = {
+  webpack(config, { server, dev }) {
+    if (server) {
+      config.entry = {
+        express: "./src/express.js",
+        vercel: "./src/vercel.js",
+      };
+
+      // Exclude node modules from build
+      config = nodeExternals.apply(config);
+
+      // Enabled restarting of the server for express in dev mode
+      if (dev) {
+        expressDev.apply(config, { script: "./dist/express.js" });
+      }
+    }
+
+    return config;
+  },
+};
+```

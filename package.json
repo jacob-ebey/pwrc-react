@@ -11,5 +11,8 @@
   ],
   "dependencies": {
     "cross-fetch": "^3.0.6"
+  },
+  "devDependencies": {
+    "standard": "^16.0.3"
   }
 }

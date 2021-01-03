@@ -1,6 +1,6 @@
 import { createResourceFactory } from "react-lazy-data";
 
-const context = require.context("../../blog", false, /\.md$/, "lazy");
+const context = require.context("../../content/blog", false, /\.md$/, "lazy");
 
 function getDate(request) {
   const str = request.replace(/^\.\//, "").split("--")[0];
