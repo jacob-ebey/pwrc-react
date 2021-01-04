@@ -10,8 +10,8 @@
     "start": "node ./dist/express.js"
   },
   "devDependencies": {
-    "@pwrc/cli": "*",
-    "@pwrc/webpack": "*",
+    "@pwrc/cli": "0.0.1-beta.1",
+    "@pwrc/webpack": "0.0.1-beta.1",
     "autoprefixer": "^10.1.0",
     "cross-env": "^7.0.3",
     "rimraf": "^3.0.2",
@@ -19,9 +19,10 @@
     "webpack-node-externals": "^2.5.2"
   },
   "dependencies": {
-    "@pwrc/cache-control": "*",
-    "@pwrc/express": "*",
-    "@pwrc/static": "*",
+    "@pwrc/cache-control": "0.0.1-beta.1",
+    "@pwrc/express": "0.0.1-beta.1",
+    "@pwrc/static": "0.0.1-beta.1",
+    "@pwrc/vercel": "0.0.1-beta.1",
     "classnames": "^2.2.6",
     "cross-fetch": "^3.0.6",
     "express": "^4.17.1",

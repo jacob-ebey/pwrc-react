@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@pwrc/prerender": "*"
+    "@pwrc/prerender": "0.0.1-beta.1"
   },
   "devDependencies": {
     "@vercel/node": "^1.8.5"

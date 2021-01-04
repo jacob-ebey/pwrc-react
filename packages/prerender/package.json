@@ -9,7 +9,7 @@
     "react-helmet-async": "1.0.x"
   },
   "dependencies": {
-    "@pwrc/cache-control": "*",
+    "@pwrc/cache-control": "0.0.1-beta.1",
     "react-async-ssr": "^0.7.2",
     "react-lazy-data": "^0.2.4"
   },
