@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "pwrc-react",
-  "version": "1.0.0",
+  "version": "0.0.1-beta.1",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
