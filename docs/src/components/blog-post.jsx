@@ -1,20 +1,20 @@
-import * as React from "react";
-import { Helmet } from "react-helmet-async";
+import * as React from 'react'
+import { Helmet } from 'react-helmet-async'
 
-import global from "../../content/global";
+import global from '../../content/global'
 
-import TextHero from "./text-hero";
+import TextHero from './text-hero'
 
-import "../styles/markdown.css";
+import '../styles/markdown.css'
 
-function BlogPost({ post }) {
+function BlogPost ({ post }) {
   return (
     <>
-      <Helmet htmlAttributes={{ lang: "en-us" }}>
+      <Helmet htmlAttributes={{ lang: 'en-us' }}>
         <title>
           {global.siteName} | {post.attributes.title}
         </title>
-        <meta name="description" content={post.attributes.description} />
+        <meta name='description' content={post.attributes.description} />
       </Helmet>
 
       <TextHero
@@ -23,11 +23,11 @@ function BlogPost({ post }) {
       />
 
       <article
-        className="markdown my-36"
+        className='markdown my-36'
         dangerouslySetInnerHTML={{ __html: post.html }}
       />
     </>
-  );
+  )
 }
 
-export default BlogPost;
+export default BlogPost

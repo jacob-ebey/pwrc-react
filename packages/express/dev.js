@@ -1,19 +1,19 @@
-const path = require("path");
+const path = require('path')
 
-const NodemonPlugin = require("nodemon-webpack-plugin");
+const NodemonPlugin = require('nodemon-webpack-plugin')
 
-function dev({ script }) {
+function dev ({ script }) {
   return new NodemonPlugin({
     script,
-    watch: path.resolve(process.cwd(), "dist"),
-  });
+    watch: path.resolve(process.cwd(), 'dist')
+  })
 }
 
 dev.apply = (config, opts) => {
-  config.plugins = config.plugins || [];
-  config.plugins.push(dev(opts));
+  config.plugins = config.plugins || []
+  config.plugins.push(dev(opts))
 
-  return config;
-};
+  return config
+}
 
-module.exports = dev;
+module.exports = dev

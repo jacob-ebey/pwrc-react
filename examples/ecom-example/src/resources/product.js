@@ -1,10 +1,10 @@
-import { createResourceFactory } from "react-lazy-data";
-import fetch from "cross-fetch";
+import { createResourceFactory } from 'react-lazy-data'
+import fetch from 'cross-fetch'
 
 const ProductResource = createResourceFactory(
   (id) =>
     fetch(`https://pwrc-react.vercel.app/api/fakestoreapi/products/${id}`).then((res) => res.json()),
-  { id: "product" }
-);
+  { id: 'product' }
+)
 
-export default ProductResource;
+export default ProductResource

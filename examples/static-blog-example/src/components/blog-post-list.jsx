@@ -1,13 +1,13 @@
-import * as React from "react";
-import BlogPostCard from "./blog-post-card";
+import * as React from 'react'
+import BlogPostCard from './blog-post-card'
 
-function BlogPostList({ blogPosts }) {
+function BlogPostList ({ blogPosts }) {
   return (
     <>
       {blogPosts.map((blogPost) => (
         <BlogPostCard
           key={blogPost.slug}
-          className="mb-8"
+          className='mb-8'
           categories={blogPost.categories}
           date={blogPost.date}
           description={blogPost.description}
@@ -16,7 +16,7 @@ function BlogPostList({ blogPosts }) {
         />
       ))}
     </>
-  );
+  )
 }
 
-export default BlogPostList;
+export default BlogPostList

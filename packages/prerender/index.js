@@ -1,34 +1,31 @@
-const { createElement, Fragment } = require("react");
+const { createElement } = require('react')
 const {
-  renderToStaticMarkupAsync,
-  renderToStringAsync,
-} = require("react-async-ssr");
+  renderToStringAsync
+} = require('react-async-ssr')
 const {
-  DataExtractor,
-  DataExtractorManager,
-} = require("react-lazy-data/server");
-const { StaticRouter } = require("react-router-dom");
-const { ChunkExtractor } = require("react-lazy-ssr/server");
-const { HelmetProvider } = require("react-helmet-async");
+  DataExtractor
+} = require('react-lazy-data/server')
+const { StaticRouter } = require('react-router-dom')
+const { ChunkExtractor } = require('react-lazy-ssr/server')
+const { HelmetProvider } = require('react-helmet-async')
 
-const App = require("@pwrc/app").default;
-const Document = require("@pwrc/document").default;
-const useCacheControl = require("@pwrc/cache-control");
+const App = require('@pwrc/app').default
+const Document = require('@pwrc/document').default
+const useCacheControl = require('@pwrc/cache-control')
 
-const fs = require("fs");
-const path = require("path");
-
-const stats = COMPILER_PROVIDED_STATS;
+/* eslint-disable no-undef */
+const stats = COMPILER_PROVIDED_STATS
+/* eslint-enable no-undef */
 
 /**
  * @param {string} location
  */
-async function prerender(location, options) {
-  const basename = (options && options.basename) || "";
-  const chunkExtractor = new ChunkExtractor({ stats });
-  const dataExtractor = new DataExtractor();
-  const cacheControlContext = {};
-  const helmetContext = {};
+async function prerender (location, options) {
+  const basename = (options && options.basename) || ''
+  const chunkExtractor = new ChunkExtractor({ stats })
+  const dataExtractor = new DataExtractor()
+  const cacheControlContext = {}
+  const helmetContext = {}
 
   const appHtml = await renderToStringAsync(
     chunkExtractor.collectChunks(
@@ -48,71 +45,69 @@ async function prerender(location, options) {
         )
       )
     )
-  );
+  )
 
-  const lazyData = dataExtractor.getData();
-
-  const dataTag = dataExtractor.getScript();
+  const dataTag = dataExtractor.getScript()
   const publicPath =
-    stats.publicPath !== "auto" ? stats.publicPath || "/" : "/";
+    stats.publicPath !== 'auto' ? stats.publicPath || '/' : '/'
 
-  const paths = chunkExtractor.getScriptFiles();
-  const modifiers = "";
+  const paths = chunkExtractor.getScriptFiles()
+  const modifiers = ''
   const scripts = paths
-    .filter((p) => p.endsWith(".js"))
+    .filter((p) => p.endsWith('.js'))
     .map((path) => {
       const scriptModifiers =
-        modifiers === ""
-          ? ""
-          : `${modifiers} onload="(window.__REACT_LAZY_SSR_FILES_READY__ = window.__REACT_LAZY_SSR_FILES_READY__ || []).push(${stringifyString(
+        modifiers === ''
+          ? ''
+          : `${modifiers} onload="(window.__REACT_LAZY_SSR_FILES_READY__ = window.__REACT_LAZY_SSR_FILES_READY__ || []).push(${JSON.stringify(
               path
-            )})"`;
-      return `<script src="${publicPath}${path}"${scriptModifiers}></script>`;
-    });
-  const chunkNames = chunkExtractor._chunkNames;
+            )})"`
+      return `<script src="${publicPath}${path}"${scriptModifiers}></script>`
+    })
+  const chunkNames = chunkExtractor._chunkNames
   if (chunkNames.size > 0) {
     let varsJs = `window.__REACT_LAZY_SSR_CHUNKS_REQUIRED__ = ${JSON.stringify(
       Array.from(chunkNames)
-    )};`;
-    if (modifiers !== "") {
+    )};`
+    if (modifiers !== '') {
       varsJs += `\nwindow.__REACT_LAZY_SSR_FILES_REQUIRED__ = ${JSON.stringify(
         Array.from(paths)
-      )};`;
+      )};`
     }
-    scripts.unshift(`<script>${varsJs}</script>`);
+    scripts.unshift(`<script>${varsJs}</script>`)
   }
-  const chunkTags = scripts.join("\n");
+  const chunkTags = scripts.join('\n')
 
   const preloadTags = paths
     .map((chunk) => {
-      if (chunk.endsWith(".css")) {
-        return `<link rel="stylesheet" href="${publicPath}${chunk}" />`;
+      if (chunk.endsWith('.css')) {
+        return `<link rel="stylesheet" href="${publicPath}${chunk}" />`
       }
 
-      return `<link rel="preload" as="script" href="${publicPath}${chunk}" />`;
+      return `<link rel="preload" as="script" href="${publicPath}${chunk}" />`
     })
-    .join("\n");
+    .join('\n')
 
-  const { helmet } = helmetContext;
+  const { helmet } = helmetContext
 
   const documentHtml = Document({
     html: appHtml,
     htmlAttributes:
-      helmet && helmet.htmlAttributes ? helmet.htmlAttributes.toString() : "",
+      helmet && helmet.htmlAttributes ? helmet.htmlAttributes.toString() : '',
     head: [
-      `<meta charset="UTF-8">`,
+      '<meta charset="UTF-8">',
       preloadTags,
-      helmet && helmet.title ? helmet.title.toString() : "",
-      helmet && helmet.meta ? helmet.meta.toString() : "",
-      helmet && helmet.link ? helmet.link.toString() : "",
-    ].join("\n"),
-    scripts: [chunkTags, dataTag].join("\n"),
-  });
+      helmet && helmet.title ? helmet.title.toString() : '',
+      helmet && helmet.meta ? helmet.meta.toString() : '',
+      helmet && helmet.link ? helmet.link.toString() : ''
+    ].join('\n'),
+    scripts: [chunkTags, dataTag].join('\n')
+  })
 
   return {
     html: documentHtml,
-    maxAge: cacheControlContext.maxAge || 0,
-  };
+    maxAge: cacheControlContext.maxAge || 0
+  }
 }
 
-module.exports = prerender;
+module.exports = prerender

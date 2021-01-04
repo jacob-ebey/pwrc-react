@@ -1,4 +1,4 @@
-function Document({ html, htmlAttributes, scripts, head }) {
+function Document ({ html, htmlAttributes, scripts, head }) {
   return `<!DOCTYPE html>
     <html ${htmlAttributes}>
       <head>
@@ -9,7 +9,7 @@ function Document({ html, htmlAttributes, scripts, head }) {
         ${scripts}
       </body>
     </html>
-  `;
+  `
 }
 
-export default Document;
+export default Document

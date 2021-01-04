@@ -1,2 +1,4 @@
-.vercel
-node_modules
+.vercel/
+node_modules/
+**/dist/
+**/public/static/

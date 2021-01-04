@@ -1,3 +1,7 @@
-import pwrcVercel from "@pwrc/vercel";
+import pwrcVercel from '@pwrc/vercel'
 
-export default pwrcVercel({ basename: BASE_PATH });
+/* eslint-disable no-undef */
+const basename = BASE_PATH
+/* eslint-enable no-undef */
+
+export default pwrcVercel({ basename })

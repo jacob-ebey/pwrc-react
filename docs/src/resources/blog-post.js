@@ -1,16 +1,16 @@
-import { createResourceFactory } from "react-lazy-data";
+import { createResourceFactory } from 'react-lazy-data'
 
-const context = require.context("../../content/blog", false, /\.md$/);
+const context = require.context('../../content/blog', false, /\.md$/)
 
 const BlogPostResource = createResourceFactory(
   async (id) => {
-    const trimmedId = id.replace(/^\.\//, "")
-    const request = trimmedId.endsWith(".md") ? trimmedId : `${trimmedId}.md`;
-    const blogPost = await context(`./${request}`);
+    const trimmedId = id.replace(/^\.\//, '')
+    const request = trimmedId.endsWith('.md') ? trimmedId : `${trimmedId}.md`
+    const blogPost = await context(`./${request}`)
 
-    return blogPost;
+    return blogPost
   },
-  { id: "blog-post" }
-);
+  { id: 'blog-post' }
+)
 
-export default BlogPostResource;
+export default BlogPostResource

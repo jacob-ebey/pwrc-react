@@ -1,101 +1,101 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs')
+const path = require('path')
 
-const webpack = require("webpack");
-const { merge } = require("webpack-merge");
+const webpack = require('webpack')
+const { merge } = require('webpack-merge')
 
-const baseClientConfig = require("@pwrc/webpack/config/webpack.config.client");
-const baseServerConfig = require("@pwrc/webpack/config/webpack.config.server");
-const devConfig = require("@pwrc/webpack/config/webpack.config.development");
+const baseClientConfig = require('@pwrc/webpack/config/webpack.config.client')
+const baseServerConfig = require('@pwrc/webpack/config/webpack.config.server')
+const devConfig = require('@pwrc/webpack/config/webpack.config.development')
 
-function watchCompiler(config, shouldResolveOnFirstSuccessfulBuild) {
-  let resolve;
-  const promise = new Promise((res, rej) => {
-    resolve = res;
-    reject = rej;
-  });
+function watchCompiler (config, shouldResolveOnFirstSuccessfulBuild) {
+  let res, rej
+  const promise = new Promise((resolve, reject) => {
+    res = resolve
+    rej = reject
+  })
 
-  const compiler = webpack(config);
-  let firstBuild = true;
+  const compiler = webpack(config)
+  let firstBuild = true
   compiler.watch({}, (err, stats) => {
     if (err) {
-      console.error(err.stack || err);
+      console.error(err.stack || err)
       if (err.details) {
-        console.error(err.details);
+        console.error(err.details)
       }
       if (firstBuild && shouldResolveOnFirstSuccessfulBuild) {
-        reject(new Error("Failed on first build"));
+        rej(new Error('Failed on first build'))
       }
-      return;
+      return
     }
-    const info = stats.toJson();
+    const info = stats.toJson()
     if (stats.hasErrors()) {
-      console.log("Finished running webpack with errors.");
-      info.errors.forEach((e) => console.error(e));
+      console.log('Finished running webpack with errors.')
+      info.errors.forEach((e) => console.error(e))
       if (firstBuild && shouldResolveOnFirstSuccessfulBuild) {
-        reject(new Error("Failed on first build"));
+        rej(new Error('Failed on first build'))
       }
     } else {
       if (firstBuild && shouldResolveOnFirstSuccessfulBuild) {
-        resolve();
-        firstBuild = false;
+        res()
+        firstBuild = false
       }
     }
-    firstBuild = false;
-  });
+    firstBuild = false
+  })
 
-  return promise;
+  return promise
 }
 
-async function dev(argv) {
-  const configPath = path.resolve(process.cwd(), "pwrc.config.js");
-  let config = {};
+async function dev (argv) {
+  const configPath = path.resolve(process.cwd(), 'pwrc.config.js')
+  let config = {}
   if (fs.existsSync(configPath)) {
-    config = require(configPath);
+    config = require(configPath)
   }
 
   if (!config) {
-    console.error("No config. Did you forget to export from pwrc.config.js?");
-    process.exit(1);
+    console.error('No config. Did you forget to export from pwrc.config.js?')
+    process.exit(1)
   }
 
-  let clientConfig = merge(baseClientConfig, devConfig);
-  let serverConfig = merge(baseServerConfig, devConfig);
+  let clientConfig = merge(baseClientConfig, devConfig)
+  let serverConfig = merge(baseServerConfig, devConfig)
 
   if (config.webpack) {
     clientConfig = config.webpack(clientConfig, {
       server: false,
       dev: true,
-      webpack,
-    });
+      webpack
+    })
     serverConfig = config.webpack(serverConfig, {
       server: true,
       dev: true,
-      webpack,
-    });
+      webpack
+    })
   }
 
   if (!clientConfig) {
     console.error(
       "No client webpack config. Did you forget to return a valude from your 'webpack' function in pwrc.config.js?"
-    );
-    process.exit(1);
+    )
+    process.exit(1)
   }
 
   if (!serverConfig) {
     console.error(
       "No server webpack config. Did you forget to return a valude from your 'webpack' function in pwrc.config.js?"
-    );
-    process.exit(1);
+    )
+    process.exit(1)
   }
 
   try {
-    await watchCompiler(clientConfig, true);
-    await watchCompiler(serverConfig);
+    await watchCompiler(clientConfig, true)
+    await watchCompiler(serverConfig)
   } catch (err) {
-    console.error(err);
-    process.exit(1);
+    console.error(err)
+    process.exit(1)
   }
 }
 
-module.exports = dev;
+module.exports = dev

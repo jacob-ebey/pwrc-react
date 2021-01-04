@@ -1,16 +1,16 @@
-const fs = require("fs");
+const fs = require('fs')
 
-const exts = [".tsx", ".ts", ".jsx", ".js"];
+const exts = ['.tsx', '.ts', '.jsx', '.js']
 
-function requestFilepath(request) {
+function requestFilepath (request) {
   for (const ext of exts) {
-    const p = request + ext;
+    const p = request + ext
     if (fs.existsSync(p)) {
-      return p;
+      return p
     }
   }
 
-  return false;
+  return false
 }
 
-module.exports = requestFilepath;
+module.exports = requestFilepath

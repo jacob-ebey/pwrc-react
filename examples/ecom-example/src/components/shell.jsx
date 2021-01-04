@@ -1,14 +1,14 @@
-import * as React from "react";
+import * as React from 'react'
 
-import Header from "./header";
+import Header from './header'
 
-function Shell({ children, toggleCart }) {
+function Shell ({ children, toggleCart }) {
   return (
-    <div className="antialiased bg-white">
+    <div className='antialiased bg-white'>
       <Header onCartToggled={toggleCart} />
       {children}
     </div>
-  );
+  )
 }
 
-export default Shell;
+export default Shell

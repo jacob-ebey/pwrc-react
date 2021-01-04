@@ -1,19 +1,19 @@
-import * as React from "react";
+import * as React from 'react'
 
-function CloseIcon({ className }) {
+function CloseIcon ({ className }) {
   return (
     <svg
-    className={className}
-      fill="none"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
+      className={className}
+      fill='none'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      strokeWidth='2'
+      viewBox='0 0 24 24'
+      stroke='currentColor'
     >
-      <path d="M6 18L18 6M6 6l12 12"></path>
+      <path d='M6 18L18 6M6 6l12 12' />
     </svg>
-  );
+  )
 }
 
-export default CloseIcon;
+export default CloseIcon
