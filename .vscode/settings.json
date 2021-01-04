@@ -1,11 +1,5 @@
 {
   "files.associations": {
     "*.css": "postcss"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": ""
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": ""
   }
 }
